@@ -5,8 +5,11 @@ const THREE = require('three');
 
 // Examples
 const cubeStuff = require('./src/examples-docs/cube');
+const sphereStuff = require('./src/examples-docs/sphere');
 
-let scene, camera, renderer, cube;
+let scene, camera, renderer;
+let cube, sphere;
+
 let ADD = 0.1;
 
 function init() {
@@ -32,6 +35,9 @@ function init() {
     cube = cubeStuff.createCube();
     scene.add(cube);
 
+    sphere = sphereStuff.createSphere();
+    scene.add(sphere)
+
     // Renderer
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -44,6 +50,10 @@ let mainloop = function () {
 
     cubeStuff.hoverRotatingCube(cube);
     renderer.render(scene, camera)
+
+    sphere.rotation.x += 0.003;
+    sphere.rotation.y += 0.003;
+    sphere.rotation.z += 0.003;
 
     requestAnimationFrame(mainloop);
 }

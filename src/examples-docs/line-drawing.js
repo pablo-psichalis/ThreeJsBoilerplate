@@ -18,7 +18,6 @@ export function render() {
     geometry.vertices.push(new THREE.Vector3(0, 10, 0));
     geometry.vertices.push(new THREE.Vector3(10, 0, 0));
 
-    var line = new THREE.Line(geometry, material);
-    scene.add(line);
-    renderer.render(scene, camera);
+    let line = new THREE.Line(geometry, material);
+    return line;
 }
