@@ -1,30 +1,26 @@
 const THREE = require('three');
 
 // Basic spinning cube
-export function render() {
-    var scene = new THREE.Scene();
-    scene.background = new THREE.Color('');
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+export function createCube(scene) {
+    let geometry = new THREE.BoxGeometry(1, 1, 1);
+    let material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
 
-    camera.position.z = 5;
+    return cube;
+}
 
-    var animate = function () {
-        requestAnimationFrame(animate);
+let hoverDirection = 0.002;
+export function hoverRotatingCube(prop) {
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+    prop.rotation.x += 0.003;
+    prop.rotation.y += 0.003;
 
-        renderer.render(scene, camera);
-    };
+    prop.position.y += hoverDirection;
 
-    animate();
+    if (prop.position.y <= -0.06 || prop.position.y >= 0.06) {
+        hoverDirection *= -1;
+    }
+
 }
